@@ -1,0 +1,96 @@
+---
+const navItems = [
+  {
+    name: 'Experiencia',
+    label: 'experiencia',
+    link: '/#experiencia'
+  },
+  {
+    name: 'Proyectos',
+    label: 'proyectos',
+    link: '/#proyectos'
+  },
+  {
+    name: 'Sobre mí',
+    label: 'sobre-mi',
+    link: '/#sobre-mi'
+  },
+  {
+    name: 'Contacto',
+    label: 'contacto',
+    link: '/#contacto'
+  },
+]
+---
+
+<header>
+  <nav>
+    {navItems.map(item => (
+      <a
+        href={item.link}
+        aria-label={item.label}
+      >
+        {item.name}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<style>
+  header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    position: fixed;
+    top: 0px;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    animation: nav-shadow 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  nav > * + * {
+    margin-left: 1rem;
+  }
+
+  a {
+    color: var(--text-100);
+    transition: color 0.2s ease-in-out;
+    font-size: 0.95rem;
+    font-weight: 400;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    white-space: nowrap;
+  }
+
+  a:hover {
+    color: var(--primary-100);
+  }
+
+  @keyframes nav-shadow {
+    to {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Sombra con anillo blanco */
+      backdrop-filter: blur(10px); /* Desenfoque del fondo */
+      background-color: var(--accent-100-opacity); /* Color de fondo gris con opacidad */
+    }
+  }
+
+  @media (max-width: 336px) {
+    nav {
+      padding-left: 0.2rem;
+      padding-right: 0.2rem;
+    }
+  }
+</style>

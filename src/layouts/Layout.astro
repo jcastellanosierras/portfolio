@@ -1,42 +1,63 @@
 ---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
 interface Props {
 	title: string;
+	description: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/josecastellano.webp" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="stylesheet" href="/styles/reset.css">
+
+		<!-- Onest Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+
+		<!-- robots.txt -->
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
 		<title>{title}</title>
 	</head>
 	<body>
+		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--primary-100:#61DAFB;
+    --primary-200:#39bcdc;
+    --primary-300:#007997;
+    --accent-100:#FF4081;
+    --accent-200:#ffe4ff;
+    --text-100:#FFFFFF;
+    --text-200:#e0e0e0;
+    --bg-100:#282C34;
+    --bg-200:#383c44;
+    --bg-300:#50555e;
+		--accent-100-opacity: rgba(255, 64, 129, 0.3);
+		--accent-200-opacity: rgba(255, 64, 129, 0.3);
 	}
+
 	html {
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: var(--bg-100);
 		background-size: 224px;
 	}
+
 	code {
 		font-family:
 			Menlo,
@@ -48,4 +69,29 @@ const { title } = Astro.props;
 			Courier New,
 			monospace;
 	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: var(--text-100);
+		text-wrap: balance;
+		font-family: "Onest", system-ui, sans-serif;
+	}
+
+	p {
+		color: var(--text-200);
+		line-height: 1.5;
+		font-size: 1.25rem;
+		text-wrap: pretty;
+		font-family: "Onest", system-ui, sans-serif;
+	}
+
+	.onest-font {
+  font-family: "Onest", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+a {
+	text-decoration: none;
+}
 </style>

@@ -1,0 +1,36 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props
+---
+
+<a
+  class="pill"
+  href={href}
+  target={href ? '_blank' : undefined}
+  rel={href ? 'noopener noreferrer' : undefined}
+>
+  <slot />
+</a>
+
+<style>
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 1em;
+    padding: 0.3rem 1rem;
+    background-color: var(--accent-200);
+    color: var(--bg-100);
+    font-size: 1rem;
+    font-weight: 500;
+
+    transition: background-color 0.2s;
+  }
+
+  .pill:hover {
+    background-color: var(--accent-100);
+  }
+</style>

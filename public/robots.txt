@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://josecastellano.dev/sitemap-index.xml
