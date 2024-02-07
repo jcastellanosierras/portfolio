@@ -82,13 +82,14 @@ const linkedInHref = "https://www.linkedin.com/in/josecastellanosierras/";
           >mi canal de YouTube</a
         >.
       </p>
-      <button>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://github.com/jcastellanosierras">Ver proyectos</a
-        >
-      </button>
+      <a
+        id="proyects-link"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/jcastellanosierras"
+      >
+        <button>Ver proyectos</button>
+      </a>
     </section>
 
     <section id="sobre-mi">
@@ -137,11 +138,11 @@ const linkedInHref = "https://www.linkedin.com/in/josecastellanosierras/";
         dependa única y exclusivamente de mí</strong>.
       </p>
       <p>
-        Es por eso que tengo <a
+        Es por eso que tengo mi <a
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.youtube.com/@josecastellanodev"
-          >mi Canal de YouTube</a
+          >Canal de YouTube</a
         >, y mi <a
           href="Sígueme en LinkedIn: www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&followMember=josecastellanosierras"
           target="_blank"
@@ -218,6 +219,12 @@ const linkedInHref = "https://www.linkedin.com/in/josecastellanosierras/";
 
   a {
     color: var(--accent-200);
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--accent-100);
   }
 
   #experience-list {
@@ -286,6 +293,37 @@ const linkedInHref = "https://www.linkedin.com/in/josecastellanosierras/";
 
   #sobre-mi > p strong {
     color: var(--primary-200);
+  }
+
+  #proyects-link {
+    margin: 0 auto;
+  }
+
+  button {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--accent-200);
+    background: transparent;
+    cursor: pointer;
+    transition: ease-out 0.5s;
+    border: 2px solid var(--accent-200);
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 0 var(--accent-200);
+  }
+
+  button:hover {
+    color: var(--text-100);
+    box-shadow: inset 0 -100px 0 0 var(--accent-100);
+  }
+
+  button:active {
+    transform: scale(0.9);
   }
 
   @media (min-width: 768px) {
