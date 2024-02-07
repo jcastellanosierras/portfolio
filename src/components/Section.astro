@@ -1,0 +1,65 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section id={id}>
+  <slot />
+</section>
+
+<style is:global>
+  h1,
+  h2 {
+    margin-top: 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  section {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 50px;
+  }
+
+  section > * {
+    margin-top: 1rem;
+  }
+
+  strong {
+    color: var(--primary-100);
+    font-weight: 600;
+  }
+
+  section p a {
+    color: var(--accent-200);
+    text-decoration: underline;
+    transition: color 0.2s;
+  }
+
+  section p a:hover {
+    color: var(--accent-100);
+  }
+
+  @media (min-width: 768px) {
+    section {
+      width: 70ch;
+    }
+  }
+</style>

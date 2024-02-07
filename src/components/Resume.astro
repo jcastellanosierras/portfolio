@@ -1,0 +1,39 @@
+---
+import Avatar from "../components/Avatar.astro";
+import Pill from "../components/Pill.astro";
+import LinkedInIcon from "../components/icons/LinkedInIcon.astro";
+import MailIcon from "../components/icons/MailIcon.astro";
+import Section from "./Section.astro";
+
+const linkedInHref = "https://www.linkedin.com/in/josecastellanosierras/";
+---
+
+<Section id="inicio">
+  <Avatar />
+  <h1>José Castellano Sierras</h1>
+  <h2>Desarrollador FullStack</h2>
+  <p>
+    +1 año de experiencia. <strong
+      >Ingeniero Telemático, Desarrollador FullStack y Creador de Contenido
+      sobre Desarrollo Web y Emprendimiento</strong
+    >. Soy de Málaga, España.
+  </p>
+  <div id="pills">
+    <Pill href={linkedInHref}>
+      <LinkedInIcon />
+      LinkedIn
+    </Pill>
+    <Pill href="mailto:jcastellanosierras@gmail.com">
+      <MailIcon />
+      Contáctame
+    </Pill>
+  </div>
+</Section>
+
+<style>
+  #pills {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+</style>

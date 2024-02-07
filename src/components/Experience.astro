@@ -1,0 +1,84 @@
+---
+import BriefcaseIcon from "../components/icons/BriefcaseIcon.astro";
+import Section from "./Section.astro";
+---
+
+<Section id="experiencia">
+  <h2>
+    <BriefcaseIcon width="30" height="30" />
+    Experiencia
+  </h2>
+  <ul id="experience-list">
+    <li>
+      <div>
+        <h3><strong>Desarrollador FullStack</strong></h3>
+        <h4>DM Integrations</h4>
+        <p>Enero 2024</p>
+      </div>
+      <p>
+        Contrato de formación. <strong
+          >Desarrollo de aplicaciones web completas</strong
+        > usando <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://remix.run/">Remix</a
+        >, React, además de varias bibliotecas como TanStack Table,
+        react-hook-forms, react-hot-toast, Radix UI, Shadcb/ui, etc. Además
+        de usar <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.edgedb.com/">EdgeDB</a
+        > como base de datos. <strong
+          >Implantación de Arquitectura Hexagonal</strong
+        >.
+      </p>
+    </li>
+  </ul>
+</Section>
+
+<style>
+  #experience-list {
+    list-style-type: disc;
+  }
+
+  #experience-list::marker {
+    color: var(--primary-100);
+  }
+
+  #experience-list > li {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  #experience-list > li > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    line-height: 1.5;
+  }
+
+  #experience-list > li > div > h3 {
+    font-size: 1.5rem;
+  }
+
+  #experience-list > li > div > h4 {
+    font-size: 1.2rem;
+  }
+
+  #experience-list > li > div > p {
+    font-size: 0.9rem;
+  }
+
+  #experience-list > li > p {
+    font-size: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    #experience-list > li {
+      flex-direction: row;
+      gap: 5rem;
+    }
+  }
+</style>
