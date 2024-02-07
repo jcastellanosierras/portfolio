@@ -1,4 +1,6 @@
 ---
+import "@fontsource-variable/onest"
+
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 
@@ -19,11 +21,6 @@ const { title, description } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/josecastellano.webp" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="stylesheet" href="/styles/reset.css">
-
-		<!-- Onest Font -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
 
 		<!-- robots.txt -->
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -73,7 +70,7 @@ const { title, description } = Astro.props;
 	h1, h2, h3, h4, h5, h6 {
 		color: var(--text-100);
 		text-wrap: balance;
-		font-family: "Onest", system-ui, sans-serif;
+		font-family: "Onest Variable", system-ui, sans-serif;
 	}
 
 	p {
@@ -81,15 +78,15 @@ const { title, description } = Astro.props;
 		line-height: 1.5;
 		font-size: 1.25rem;
 		text-wrap: pretty;
-		font-family: "Onest", system-ui, sans-serif;
+		font-family: "Onest Variable", system-ui, sans-serif;
 	}
 
-	.onest-font {
+	/* .onest-font {
   font-family: "Onest", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-}
+} */
 
 a {
 	text-decoration: none;
