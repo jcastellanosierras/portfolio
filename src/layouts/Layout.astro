@@ -39,7 +39,9 @@ const { title, description } = Astro.props;
 	</head>
 	<body>
 		<Header />
-		<slot />
+		<main id="slot-container">
+			<slot />
+		</main>
 		<Footer />
 	</body>
 </html>
@@ -98,7 +100,22 @@ const { title, description } = Astro.props;
   font-style: normal;
 } */
 
-a {
-	text-decoration: none;
-}
+	a {
+		text-decoration: none;
+	}
+
+	#slot-container {
+		padding-top: 100px;
+		flex-grow: 1;
+		display: flex;
+    flex-direction: column;
+    align-items: center;
+	}
+
+	body {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+	}
 </style>
