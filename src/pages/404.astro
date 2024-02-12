@@ -1,0 +1,65 @@
+---
+import Layout from '../layouts/Layout.astro'
+import BackIcon from '../components/icons/BackIcon.astro'
+
+const title = 'Página no encontrada - Porfolio de José Castellano Sierras'
+const description = ''
+---
+
+<Layout 
+  title={title}
+  description={description}
+>
+  <h1>404: Página no encontrada</h1>
+  <nav>
+    <a href="/">
+      <BackIcon width="20px" height="20px" />
+      Volver al inicio
+    </a>
+  </nav>
+  <iframe src="https://giphy.com/embed/26n6WywJyh39n1pBu" class="giphy-embed" allowfullscreen></iframe>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  nav {
+    margin: 2rem auto;
+    text-align: center;
+  }
+
+  iframe {
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    width: 240px;
+    height: 160px;
+  }
+
+  a {
+    color: var(--text-200);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    gap: 0.2rem;
+  }
+
+  a:hover {
+    color: var(--primary-100);
+  }
+
+  @media (width >= 564px) {
+    iframe {
+      width: 480px;
+      height: 320px;
+    }
+  }
+</style>
