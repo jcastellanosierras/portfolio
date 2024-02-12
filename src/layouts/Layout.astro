@@ -7,9 +7,10 @@ import Header from '../components/Header.astro';
 interface Props {
 	title: string;
 	description: string;
+	index?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, index = true } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,6 +22,9 @@ const { title, description } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/josecastellano.webp" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="stylesheet" href="/styles/reset.css">
+
+		<!-- Index  -->
+		<meta name="robots" content={index ? "index, follow" : "noindex, nofollow"} />
 
 		<!-- robots.txt -->
 		<link rel="sitemap" href="/sitemap-index.xml" />
