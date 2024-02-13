@@ -9,6 +9,7 @@ const description = ''
 <Layout 
   title={title}
   description={description}
+  index={false}
 >
   <h1>404: Página no encontrada</h1>
   <nav>
@@ -17,7 +18,7 @@ const description = ''
       Volver al inicio
     </a>
   </nav>
-  <iframe src="https://giphy.com/embed/26n6WywJyh39n1pBu" class="giphy-embed" allowfullscreen></iframe>
+  <video src="/404.webm" autoplay loop muted></video>
 </Layout>
 
 <style>
@@ -34,7 +35,7 @@ const description = ''
     text-align: center;
   }
 
-  iframe {
+  video {
     margin: 0 auto;
     margin-bottom: 2rem;
     width: 240px;
@@ -57,7 +58,7 @@ const description = ''
   }
 
   @media (width >= 564px) {
-    iframe {
+    video {
       width: 480px;
       height: 320px;
     }
