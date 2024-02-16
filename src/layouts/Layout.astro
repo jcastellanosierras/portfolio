@@ -16,6 +16,10 @@ const { title, description, index = true } = Astro.props;
 <!doctype html>
 <html lang="es">
 	<head>
+		<!-- Google Tag Manager -->
+		<script src="/googleTag.js"></script>
+		<!-- End Google Tag Manager -->
+
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
@@ -42,6 +46,11 @@ const { title, description, index = true } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZVQ9SC"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+
 		<Header />
 		<main id="slot-container">
 			<slot />
