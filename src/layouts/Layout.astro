@@ -6,7 +6,7 @@ import Header from '../components/Header.astro';
 
 interface Props {
 	title: string;
-	description: string;
+	description?: string;
 	index?: boolean;
 }
 
@@ -32,17 +32,6 @@ const { title, description, index = true } = Astro.props;
 
 		<!-- robots.txt -->
 		<link rel="sitemap" href="/sitemap-index.xml" />
-
-		<!-- Google tag (gtag.js) -->
-		<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-KB0W5H1QHK"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'G-KB0W5H1QHK');
-		</script> -->
-
 		<title>{title}</title>
 	</head>
 	<body>
@@ -72,6 +61,12 @@ const { title, description, index = true } = Astro.props;
     --bg-300:#50555e;
 		--accent-100-opacity: rgba(255, 64, 129, 0.3);
 		--accent-200-opacity: rgba(255, 64, 129, 0.3);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
 	}
 
 	html {
@@ -106,12 +101,15 @@ const { title, description, index = true } = Astro.props;
 		font-family: "Onest Variable", system-ui, sans-serif;
 	}
 
-	/* .onest-font {
-  font-family: "Onest", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-} */
+	label {
+		color: var(--text-200);
+		font-family: "Onest Variable", system-ui, sans-serif;
+	}
+
+	input, textarea {
+		font-family: "Onest Variable", system-ui, sans-serif;
+		font-size: 0.9rem;
+	}
 
 	a {
 		text-decoration: none;
@@ -130,5 +128,17 @@ const { title, description, index = true } = Astro.props;
 		display: flex;
 		flex-direction: column;
 		margin: 0;
+	}
+
+	main {
+		width: 90%;
+		margin: 0 auto;
+		padding-bottom: 3rem;
+	}
+
+	@media (min-width: 768px) {
+		main {
+			width: 70ch;
+		}
 	}
 </style>
