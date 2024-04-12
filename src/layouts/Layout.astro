@@ -23,7 +23,7 @@ const { title, description, index = true } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/josecastellano.webp" />
+		<link  rel="icon" type="image/svg+xml" href="/josecastellano.avif" />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="stylesheet" href="/styles/reset.css">
 
@@ -36,9 +36,10 @@ const { title, description, index = true } = Astro.props;
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZVQ9SC"
+		<noscript><iframe loading="lazy" src="https://www.googletagmanager.com/ns.html?id=GTM-W8ZVQ9SC"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
+		<noscript ></noscript>
 
 		<Header />
 		<main id="slot-container">
