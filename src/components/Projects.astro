@@ -1,6 +1,6 @@
 ---
-import Pill from './Pill.astro'
 import Section from './Section.astro'
+import Tag from './Tag.astro'
 import GithubButton from './buttons/GithubButton.astro'
 import VisitButton from './buttons/VisitButton.astro'
 import YouTubeButton from './buttons/YouTubeButton.astro'
@@ -21,13 +21,13 @@ import CodeIcon from './icons/CodeIcon.astro'
       <picture>
         <source type="image/avif" srcset="clon-trello.avif" />
         <source type="image/webp" srcset="clon-trello.webp" />
-        <img src="clon-trello.png" alt="clon trello" />
+        <img width="200" height="200" src="clon-trello.png" alt="clon trello" />
       </picture>
     </div>
     <div class="project-details">
       <h3>Clon de Trello</h3>
       <div class="technologies">
-        <Pill>React</Pill>
+        <Tag>React</Tag>
       </div>
       <p>
         Clon de Trello hecho con <strong>React</strong>. La navegación entre tableros está hecha
