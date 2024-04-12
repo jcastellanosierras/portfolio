@@ -1,6 +1,10 @@
 ---
-import Section from "./Section.astro"
-import CodeIcon from "./icons/CodeIcon.astro"
+import Pill from './Pill.astro'
+import Section from './Section.astro'
+import GithubButton from './buttons/GithubButton.astro'
+import VisitButton from './buttons/VisitButton.astro'
+import YouTubeButton from './buttons/YouTubeButton.astro'
+import CodeIcon from './icons/CodeIcon.astro'
 ---
 
 <Section id="proyectos">
@@ -9,10 +13,36 @@ import CodeIcon from "./icons/CodeIcon.astro"
     Aquí iré subiendo los proyectos que construya en <a
       target="_blank"
       rel="noopener noreferrer"
-      href="https://www.youtube.com/@josecastellanodev"
-      >mi canal de YouTube</a
+      href="https://www.youtube.com/@josecastellanodev">mi canal de YouTube</a
     >.
   </p>
+  <article class="project">
+    <div class="project-image">
+      <picture>
+        <source type="image/avif" srcset="clon-trello.avif" />
+        <source type="image/webp" srcset="clon-trello.webp" />
+        <img src="clon-trello.png" alt="clon trello" />
+      </picture>
+    </div>
+    <div class="project-details">
+      <h3>Clon de Trello</h3>
+      <div class="technologies">
+        <Pill>React</Pill>
+      </div>
+      <p>
+        Clon de Trello hecho con <strong>React</strong>. La navegación entre tableros está hecha
+        mediante <strong>React Router</strong>. Para los estilos se utilizan <strong>Tailwind</strong> y
+        <strong>Shadcn/ui</strong>. Para el Drag And Drop se usa una librería hecha por el equipo
+        de <strong>Formkit</strong>. Y para almacenar el estado global de la aplicación se
+        utiliza <strong>Zustand</strong>.
+      </p>
+      <div class="project-links">
+        <YouTubeButton link='https://www.youtube.com/playlist?list=PLU7evwQ_gsw73XmSQRRLAtnlbVU0uE_UY' />
+        <GithubButton link='https://github.com/jcastellanosierras/clon-trello-time-tracker' />
+        <VisitButton link='https://clon-trello-time-tracker.vercel.app/' />
+      </div>
+    </div>
+  </article>
   <a
     id="proyects-link"
     target="_blank"
@@ -58,6 +88,49 @@ import CodeIcon from "./icons/CodeIcon.astro"
     margin: 0 auto;
   }
 
+  .project {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .project-image {
+    width: 50%;
+  }
+
+  .project-image img {
+    border-radius: 10px;
+    width: 100%;
+  }
+
+  .project-details {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-details h3 {
+    color: var(--text-100);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .project-details p {
+    font-size: 1.1rem;
+  }
+
+  .project .technologies {
+    display: flex;
+    gap: 0.5rem;
+    cursor: default;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+  }
+
   button {
     margin-top: 2rem;
     border: none;
@@ -70,7 +143,9 @@ import CodeIcon from "./icons/CodeIcon.astro"
     font-weight: 500;
     padding: 0.8rem 0.8rem;
     text-decoration: none;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition:
+      background-color 0.2s ease-in-out,
+      color 0.2s ease-in-out;
   }
 
   button:hover {
@@ -80,5 +155,16 @@ import CodeIcon from "./icons/CodeIcon.astro"
 
   button:active {
     transform: scale(0.9);
+  }
+
+  @media (max-width: 768px) {
+    .project {
+      flex-direction: column;
+    }
+
+    .project-image,
+    .project-details {
+      width: 100%;
+    }
   }
 </style>
