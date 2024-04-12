@@ -1,0 +1,20 @@
+---
+import YouTubeIcon from '../icons/YouTubeIcon.astro'
+import BaseButton from './BaseButton.astro'
+
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props
+const color = '#ff0000'
+const hoverColor = '#b20000'
+---
+
+<BaseButton
+  link={link}
+  color={color}
+  hoverColor={hoverColor}
+>
+  <YouTubeIcon /> Ver
+</BaseButton>

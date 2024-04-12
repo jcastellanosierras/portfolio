@@ -1,0 +1,20 @@
+---
+import VisitIcon from "../icons/VisitIcon.astro"
+import BaseButton from "./BaseButton.astro"
+
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props
+const color = '#007893'
+const hoverColor = '#003A47'
+---
+
+<BaseButton
+  link={link}
+  color={color}
+  hoverColor={hoverColor}
+>
+  <VisitIcon /> Probar
+</BaseButton>

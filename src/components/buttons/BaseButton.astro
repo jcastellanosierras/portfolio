@@ -1,0 +1,67 @@
+---
+interface Props {
+  link: string;
+  color?: string;
+  hoverColor?: string;
+}
+
+const defaultColors = {
+  color: 'var(--accent-100)',
+  hoverColor: 'var(--accent-200)'
+}
+
+let {
+  link,
+  color,
+  hoverColor
+} = Astro.props
+
+if (!color) {
+  color = defaultColors.color
+}
+
+if (!hoverColor) {
+  hoverColor = defaultColors.hoverColor
+} 
+---
+
+<div class="link-button">
+  <a
+  target="_blank"
+  rel="noopener noreferrer"
+  href={link}
+  >
+    <slot />
+  </a>
+</div>
+
+<style define:vars={{ color, hoverColor }}>
+  .link-button {
+    background-color: var(--color);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    /* color: white; */
+    width: 100px;
+    height: 40px;
+
+    transition: background-color 0.3s;
+  }
+
+  .link-button:hover {
+    background-color: var(--hoverColor);
+  }
+
+  a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    text-decoration: none;
+    color: var(--text-100);
+    font-weight: 500;
+    box-shadow: 2px 8px 8px 0px rgba(0, 0, 0, 0.4);
+  }
+</style>

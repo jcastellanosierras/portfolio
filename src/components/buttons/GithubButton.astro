@@ -1,0 +1,20 @@
+---
+import GithubIcon from '../icons/GithubIcon.astro'
+import BaseButton from './BaseButton.astro'
+
+interface Props {
+  link: string;
+}
+
+const { link } = Astro.props
+const color = '#1F2328'
+const hoverColor = '#3E464F'
+---
+
+<BaseButton
+  link={link}
+  color={color}
+  hoverColor={hoverColor}
+>
+  <GithubIcon /> Github
+</BaseButton>
