@@ -1,9 +1,7 @@
 ---
+import ClonTrello from './projects/ClonTrello.astro'
+import URLShorter from './projects/URLShorter.astro'
 import Section from './Section.astro'
-import Tag from './Tag.astro'
-import GithubButton from './buttons/GithubButton.astro'
-import VisitButton from './buttons/VisitButton.astro'
-import YouTubeButton from './buttons/YouTubeButton.astro'
 import CodeIcon from './icons/CodeIcon.astro'
 ---
 
@@ -16,33 +14,8 @@ import CodeIcon from './icons/CodeIcon.astro'
       href="https://www.youtube.com/@josecastellanodev">mi canal de YouTube</a
     >.
   </p>
-  <article class="project">
-    <div class="project-image">
-      <picture>
-        <source type="image/avif" srcset="clon-trello.avif" />
-        <source type="image/webp" srcset="clon-trello.webp" />
-        <img height="auto" src="clon-trello.png" alt="clon trello" />
-      </picture>
-    </div>
-    <div class="project-details">
-      <h3>Clon de Trello</h3>
-      <div class="technologies">
-        <Tag>React</Tag>
-      </div>
-      <p>
-        Clon de Trello hecho con <strong>React</strong>. La navegación entre tableros está hecha
-        mediante <strong>React Router</strong>. Para los estilos se utilizan <strong>Tailwind</strong> y
-        <strong>Shadcn/ui</strong>. Para el Drag And Drop se usa una librería hecha por el equipo
-        de <strong>Formkit</strong>. Y para almacenar el estado global de la aplicación se
-        utiliza <strong>Zustand</strong>.
-      </p>
-      <div class="project-links">
-        <YouTubeButton link='https://www.youtube.com/playlist?list=PLU7evwQ_gsw73XmSQRRLAtnlbVU0uE_UY' />
-        <GithubButton link='https://github.com/jcastellanosierras/clon-trello-time-tracker' />
-        <VisitButton link='https://clon-trello-time-tracker.vercel.app/' />
-      </div>
-    </div>
-  </article>
+  <ClonTrello />
+  <URLShorter />
   <a
     id="proyects-link"
     target="_blank"
