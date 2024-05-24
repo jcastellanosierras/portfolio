@@ -1,0 +1,50 @@
+---
+import Layout, { type BaseLayoutProps } from './Layout.astro'
+
+interface Props extends BaseLayoutProps {}
+---
+
+<Layout
+  {...Astro.props}
+>
+  <slot />
+</Layout>
+
+<style is:global>
+  header {
+    display: none !important;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 3rem;
+    letter-spacing: 0.2rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  p {
+    text-wrap: pretty;
+    text-align: center;
+  }
+
+  strong {
+    color: var(--primary-100);
+  }
+
+  #sign {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+</style>
