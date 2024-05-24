@@ -1,0 +1,22 @@
+---
+import NewsletterForm from './NewsletterForm.astro'
+import Section from './Section.astro'
+import MailIcon from './icons/MailIcon.astro'
+---
+
+<Section id='newsletter'>
+  <h2>
+    <MailIcon width="30" height="30" />
+    Mi Newsletter
+  </h2>
+  <p>
+    Suscríbete para recibir <strong>contenido exclusivo</strong>, <strong>consejos</strong> y mis <strong>aprendizajes</strong> en el mundo de la <strong>programación</strong>, y cómo <strong>ganar dinero</strong> gracias a ella.
+  </p>
+  <NewsletterForm />
+</Section>
+
+<style>
+  p {
+    margin-bottom: 1.5rem;
+  }
+</style>

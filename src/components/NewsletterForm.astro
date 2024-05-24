@@ -1,0 +1,73 @@
+<form action="/newsletter" method="post">
+  <fieldset>
+    <label for="name">Nombre: <span>*</span></label>
+    <input type="text" name="name" required placeholder="Jose Castellano...">
+  </fieldset>
+
+  <fieldset>
+    <label for="email">Email: <span>*</span></label>
+    <input type="text" name="email" required placeholder="jose@josecastellano.net">
+  </fieldset>
+
+  <button type="submit">Suscribirme</button>
+</form>
+
+<style>
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    gap: 0.8rem;
+  }
+
+  fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  input, button {
+    border: none;
+    border-radius: 3px;
+  }
+
+  input {
+    padding: 10px;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: var(--primary-200);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+
+  button:hover {
+    background-color: var(--primary-300);
+  }
+
+  span {
+    color: var(--accent-100);
+  }
+
+  @media (max-width: 380px) {
+    h1 {
+      font-size: 2rem !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    form {
+      width: 90%;
+    }
+  }
+</style>
