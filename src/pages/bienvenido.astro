@@ -1,0 +1,21 @@
+---
+import Sign from '../components/Sign.astro'
+import NewsletterLayout from '../layouts/NewsletterLayout.astro'
+---
+
+<NewsletterLayout
+  title='Bienvenido a la Newsletter de Jose Castellano'
+  index={false}
+>
+  <h1>Estás <strong>dentro</strong></h1>
+  <h2>
+    Ahora <strong>sí</strong> estás listo para <strong>
+    recibir tu regalo</strong>
+  </h2>
+  <p>
+    Por tanto, vas a recibir un email con el <strong>enlace</strong> que te va a permitir <strong>acceder</strong> a él.
+  </p>
+  <p>Espero que lo disfrutes y puedas <strong>sacarle partido</strong>.</p>
+  <p>Que tengas un buen día.</p>
+  <Sign />
+</NewsletterLayout>

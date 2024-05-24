@@ -1,0 +1,28 @@
+---
+import Sign from '../components/Sign.astro'
+import NewsletterLayout from '../layouts/NewsletterLayout.astro'
+
+const title = 'Confirma tu suscripción a la newsletter de Jose Castellano'
+const description =
+  'Esta es la página de confirmación de tu suscripción a la newsletter de Jose Castellano, Desarrollador FullStack y Creador de Contenido.'
+---
+
+<NewsletterLayout title={title} description={description} index={false}>
+  <h1>¡Hemos tenido un <strong>problema</strong>!</h1>
+  <h2>Pero tengo una <strong>buena noticia</strong> para <strong>ti</strong>.</h2>
+  <p>
+    Has recibido un <strong>email</strong> con los detalles para arreglarlo y <strong>recibir el regalo</strong>
+    solicitado.
+  </p>
+  <p>
+    Lo único que tienes que hacer es darle <strong>click</strong> al botón de <strong>confirmar la
+      suscripción</strong>.
+  </p>
+  <p>
+    Ya sabes que se está poniendo peleón el tema de la privacidad. Por tanto,
+    este simple paso me ahorra un buen follón, y a ti te permite <strong>disfrutar tu
+      regalo</strong> libremente y sin ningún problema.
+  </p>
+  <p>Espero que lo disfrutes. Buen día.</p>
+  <Sign />
+</Layout>

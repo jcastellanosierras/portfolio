@@ -1,0 +1,41 @@
+---
+import NewsletterForm from "../components/NewsletterForm.astro"
+import NewsletterLayout from "../layouts/NewsletterLayout.astro"
+import { createContact } from "../lib/brevo"
+
+export const prerender = false
+
+if (Astro.request.method === 'POST') {
+  const formData = await Astro.request.formData()
+  const name = formData.get('name')?.toString()
+  const email = formData.get('email')?.toString()
+
+  if (!name) {
+    return new Response('Name is required', { status: 400 })
+  }
+
+  if (!email) {
+    return new Response('Email is required', { status: 400 })
+  }
+
+  try {
+    await createContact(name, email)
+  } catch (error) {
+    console.error(error)
+    return new Response('Failed to create contact', { status: 500 })
+  }
+
+  return Astro.redirect('/confirma-tu-suscripcion')
+}
+
+const title = 'Suscríbete a la Newsletter de Jose Castellano'
+const descripton = 'En la Newsletter de Jose Castellano recibirás información del sector de la programación y de cómo ganar dinero gracias a ella'
+---
+
+<NewsletterLayout
+  title={title}
+  description={descripton}
+>
+  <h1>Recibe <strong>consejos</strong> y mis <strong>aprendizajes</strong> en el mundo de la <strong>programación</strong> y de cómo <strong>ganar dinero</strong> gracias a ella</h1>
+  <NewsletterForm />
+</NewsletterLayout>
