@@ -1,13 +1,24 @@
+---
+interface Props {
+  width?: string;
+  heigth?: string;
+}
+
+const { width, heigth } = Astro.props
+const styleWidth = width ?? '15%'
+const styleMinWidth = width ? 'auto' : '80px'
+---
+
 <picture>
   <source type="image/avif" srcset="josecastellano.avif" />
   <source  type="image/webp" srcset="josecastellano.webp" />
-  <img loading="lazy" width="80px" height="80px" src="josecastellano.jpg" alt="Avatar de Jose Castellano" />
+  <img loading="lazy" width={width} height={heigth} src="josecastellano.jpg" alt="Avatar de Jose Castellano" />
 </picture>
 
-<style>
+<style define:vars={{ styleWidth, styleMinWidth }}>
   img {
-    width: 15%;
-    min-width: 80px;
+    width: var(--styleWidth);
+    min-width: var(--styleMinWidth);
     border-radius: 100%;
     box-shadow: 3px 4px 8px var(--bg-200);
   }
