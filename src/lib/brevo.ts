@@ -1,7 +1,14 @@
 const NEWSLETTER_LIST_ID = 8
 
-export async function createContact(name: string, email: string) {
+export async function createContact(email: string, name?: string) {
   const url = 'https://api.brevo.com/v3/contacts/doubleOptinConfirmation'
+  
+  const attributes = {}
+
+  if (name) {
+    Object.assign(attributes, { nombre: name })
+  }
+
   const options = {
     method: 'POST',
     headers: {
@@ -11,9 +18,7 @@ export async function createContact(name: string, email: string) {
     },
     body: JSON.stringify({
       email,
-      attributes: {
-        nombre: name
-      },
+      attributes,
       includeListIds: [NEWSLETTER_LIST_ID],
       templateId: 1,
       redirectionUrl: import.meta.env.PROD

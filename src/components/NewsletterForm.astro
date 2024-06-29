@@ -1,12 +1,17 @@
 <form action="/newsletter" method="post">
-  <fieldset>
+  <!-- <fieldset>
     <label for="name">Nombre: <span>*</span></label>
     <input type="text" name="name" required placeholder="Jose Castellano...">
-  </fieldset>
+  </fieldset> -->
 
-  <fieldset>
+  <fieldset id="email-fieldset">
     <label for="email">Email: <span>*</span></label>
     <input type="text" name="email" required placeholder="jose@josecastellano.net">
+  </fieldset>
+
+  <fieldset id="privacy-policy-fieldset">
+    <input type="checkbox" name="privacy-policy" id="privacy-policy" required>
+    <label for="privacy-policy">Acepto la <a href="/politica-privacidad">política de privacidad</a> <span>*</span></label>
   </fieldset>
 
   <button type="submit">Suscribirme</button>
@@ -28,6 +33,12 @@
     gap: 0.4rem;
   }
 
+  #privacy-policy-fieldset {
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+  }
+
   input, button {
     border: none;
     border-radius: 3px;
@@ -35,6 +46,10 @@
 
   input {
     padding: 10px;
+  }
+
+  input[type="checkbox"] {
+    accent-color: var(--accent-100);
   }
 
   button {
@@ -57,6 +72,16 @@
 
   span {
     color: var(--accent-100);
+    font-size: 18px;
+  }
+
+  a {
+    color: var(--accent-200);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 
   @media (max-width: 380px) {
