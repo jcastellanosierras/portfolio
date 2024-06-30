@@ -1,3 +1,11 @@
+---
+interface Props {
+  CTA?: string
+}
+
+const { CTA } = Astro.props
+---
+
 <form action="/newsletter" method="post">
   <!-- <fieldset>
     <label for="name">Nombre: <span>*</span></label>
@@ -14,7 +22,7 @@
     <label for="privacy-policy">Acepto la <a href="/politica-privacidad">política de privacidad</a> <span>*</span></label>
   </fieldset>
 
-  <button type="submit">Suscribirme</button>
+  <button type="submit">{CTA ?? 'Suscribirme'}</button>
 </form>
 
 <style>
