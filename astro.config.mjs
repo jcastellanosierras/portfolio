@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, squooshImageService } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import vercel from "@astrojs/vercel/serverless";
@@ -29,4 +29,7 @@ export default defineConfig({
     },
     maxDuration: 8,
   }),
+  image: {
+    service: squooshImageService()
+  }
 });
