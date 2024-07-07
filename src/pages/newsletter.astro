@@ -5,19 +5,19 @@ export const prerender = false
 
 if (Astro.request.method === 'POST') {
   const formData = await Astro.request.formData()
-  // const name = formData.get('name')?.toString()
   const email = formData.get('email')?.toString()
-
-  // if (!name) {
-  //   return new Response('Name is required', { status: 400 })
-  // }
+  const listId = formData.get('listId')?.toString()
 
   if (!email) {
     return new Response('Email is required', { status: 400 })
   }
 
+  if (!listId) {
+    return new Response('List ID is required', { status: 400 })
+  }
+
   try {
-    await createContact(email)
+    await createContact(email, parseInt(listId))
   } catch (error) {
     console.error(error)
     return new Response('Failed to create contact', { status: 500 })

@@ -1,9 +1,13 @@
 ---
-interface Props {
+interface Props  {
+  listId?: number
   CTA?: string
+  isExpired?: boolean
 }
 
-const { CTA } = Astro.props
+const NEWSLETTER_LIST_ID = 9
+
+const { listId = NEWSLETTER_LIST_ID, CTA, isExpired = false } = Astro.props
 ---
 
 <form action="/newsletter" method="post">
@@ -22,7 +26,9 @@ const { CTA } = Astro.props
     <label for="privacy-policy">Acepto la <a href="/politica-privacidad">política de privacidad</a> <span>*</span></label>
   </fieldset>
 
-  <button type="submit">{CTA ?? 'Suscribirme'}</button>
+  <input type="hidden" name="listId" value={listId}>
+
+  <button disabled={isExpired} type="submit">{CTA ?? 'Suscribirme'}</button>
 </form>
 
 <style>
@@ -76,6 +82,11 @@ const { CTA } = Astro.props
 
   button:hover {
     background-color: var(--primary-300);
+  }
+
+  button:disabled {
+    background-color: var(--primary-300);
+    cursor: not-allowed;
   }
 
   span {

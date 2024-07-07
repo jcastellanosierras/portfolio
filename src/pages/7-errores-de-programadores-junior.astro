@@ -7,6 +7,18 @@ import image from '@/assets/images/7-errores-que-cometen-los-programadores-Junio
 import myImage from '@/assets/images/josecastellano.jpg'
 import CheckList from '@/components/CheckList.astro'
 
+const LEAD_MAGNET_LIST_ID = 8
+// const NEWSLETTER_LIST_ID = 9
+
+const EXPIRED_DATE = new Date(2024, 6, 8, 0)
+const now = new Date()
+
+const isExpired = now > EXPIRED_DATE
+
+console.log(now.getDate())
+console.log(EXPIRED_DATE.getDate())
+console.log(isExpired)
+
 const title = 'Suscríbete a la Newsletter de Jose Castellano'
 const descripton =
   'En la Newsletter de Jose Castellano recibirás información del sector de la programación y de cómo ganar dinero gracias a ella'
@@ -19,6 +31,23 @@ const checkPoints = [
 ---
 
 <NewsletterLayout title={title} description={descripton}>
+  {
+    isExpired && (
+      <>
+        <div id='expired'>
+          <h2>
+            Lo siento, pero se te ha acabado el tiempo para recibir el regalo.
+          </h2>
+          <p>
+            Ya no puedes acceder a este regalo. Aún así puedes apuntarte a la
+            newsletter y recibir otros regalos, todos los beneficios y todo el valor que aporto en
+            ella.
+          </p>
+        </div>
+        <div id='margin' />
+      </>
+    )
+  }
   <div id='content'>
     <section id='titles'>
       <h1>
@@ -65,11 +94,15 @@ const checkPoints = [
       />
     </section>
 
-    <NewsletterForm CTA='Descargar' />
+    <NewsletterForm
+      isExpired={isExpired}
+      listId={LEAD_MAGNET_LIST_ID}
+      CTA='Descargar'
+    />
 
     <section>
       <h2 class='subtitle'>Esto es lo que aprenderás en él:</h2>
-      <div id="check-list">
+      <div id='check-list'>
         <CheckList items={checkPoints} />
       </div>
     </section>
@@ -106,7 +139,11 @@ const checkPoints = [
 
     <section>
       <h2 class='subtitle'>Accede al contenido</h2>
-      <NewsletterForm CTA='Descargar' />
+      <NewsletterForm
+        isExpired={isExpired}
+        listId={LEAD_MAGNET_LIST_ID}
+        CTA='Descargar'
+      />
     </section>
   </div>
 </NewsletterLayout>
@@ -180,7 +217,7 @@ const checkPoints = [
   }
 
   .image {
-    box-shadow: 5px 10px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 5px 10px 10px 0px rgba(0, 0, 0, 0.25);
   }
 
   #about-me {
@@ -211,6 +248,32 @@ const checkPoints = [
     margin-bottom: 4rem;
   }
 
+  #expired {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: fit-content;
+    padding: 1rem;
+    background-color: var(--primary-300);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  #margin {
+    height: 8rem;
+  }
+
+  @media (width > 480) {
+    #margin {
+      height: 4rem;
+    }
+  }
+
   @media (width > 768px) {
     h1 {
       font-size: 2.5rem;
@@ -222,6 +285,10 @@ const checkPoints = [
 
     #about-me-content {
       flex-direction: row;
+    }
+
+    #margin {
+      height: 2rem;
     }
   }
 </style>
