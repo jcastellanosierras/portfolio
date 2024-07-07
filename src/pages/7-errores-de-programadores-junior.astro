@@ -8,7 +8,7 @@ import myImage from '@/assets/images/josecastellano.jpg'
 import CheckList from '@/components/CheckList.astro'
 
 const LEAD_MAGNET_LIST_ID = 8
-// const NEWSLETTER_LIST_ID = 9
+const NEWSLETTER_LIST_ID = 9
 
 // const EXPIRED_DATE = new Date(2024, 6, 8, 0)
 // const now = new Date()
@@ -92,8 +92,7 @@ const checkPoints = [
     </section>
 
     <NewsletterForm
-      isExpired={isExpired}
-      listId={LEAD_MAGNET_LIST_ID}
+      listId={NEWSLETTER_LIST_ID}
       CTA='Descargar'
     />
 
@@ -135,10 +134,13 @@ const checkPoints = [
     </section>
 
     <section>
-      <h2 class='subtitle'>Accede al contenido</h2>
+      <h2 class='subtitle'>
+        {isExpired
+          ? 'Apúntate a la newsletter'
+          : 'Accede al contenido'}
+      </h2>
       <NewsletterForm
-        isExpired={isExpired}
-        listId={LEAD_MAGNET_LIST_ID}
+        listId={NEWSLETTER_LIST_ID}
         CTA='Descargar'
       />
     </section>
