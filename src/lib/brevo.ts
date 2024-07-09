@@ -1,4 +1,10 @@
-export async function createContact(email: string, listId: number, name?: string) {
+export enum ListId {
+  LEAD_MAGNET = 8,
+  NEWSLETTER = 9,
+  WELCOME = 10
+}
+
+export async function createContact(email: string, listId: ListId, name?: string) {
   const url = 'https://api.brevo.com/v3/contacts/doubleOptinConfirmation'
   
   const attributes = {}
