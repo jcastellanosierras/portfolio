@@ -14,8 +14,10 @@ import CodeIcon from './icons/CodeIcon.astro'
       href="https://www.youtube.com/@josecastellanodev">mi canal de YouTube</a
     >.
   </p>
-  <ClonTrello />
-  <URLShorter />
+  <div id="projects">
+    <ClonTrello />
+    <URLShorter />
+  </div>
   <a
     id="proyects-link"
     target="_blank"
@@ -47,6 +49,13 @@ import CodeIcon from './icons/CodeIcon.astro'
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  #projects {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
 
   #sobre-mi > p {
