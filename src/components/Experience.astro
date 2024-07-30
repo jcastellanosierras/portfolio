@@ -77,7 +77,12 @@ import Section from "./Section.astro";
   @media (min-width: 768px) {
     #experience-list > li {
       flex-direction: row;
-      gap: 5rem;
+      justify-content: start;
+      gap: 2rem;
+    }
+
+    #experience-list > li > p {
+      max-width: 50%;
     }
   }
 </style>
