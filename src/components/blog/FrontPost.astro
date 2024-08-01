@@ -1,17 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import FormattedDate from '@/components/blog/FormattedDate.astro'
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 
 type Props = CollectionEntry<'blog'>
 
 const { title, heroImage, publicationDate, updateDate } = Astro.props.data
 const urlImage = `/src/assets/images/blog/${heroImage}`
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/blog/*')
 const slug = Astro.props.slug
 ---
 
 <article>
   <a href={`/blog/${slug}/`}>
-    {heroImage && <img width={1080} height={1080} src={urlImage} alt={`Imagen del post ${title}`} />}
+    {heroImage && <Image width={1080} height={1080} src={images[urlImage]()} alt={`Imagen del post: ${title}`} />}
     <div>
       <h2 class="title">{title}</h2>
       <p class="date">
