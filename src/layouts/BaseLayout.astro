@@ -1,0 +1,126 @@
+---
+import "@fontsource-variable/onest"
+
+import BaseHead from "@/components/BaseHead.astro";
+import BaseBody from "@/components/BaseBody.astro";
+
+interface Props {
+	title: string;
+	description?: string;
+	index?: boolean;
+}
+
+export interface BaseLayoutProps extends Props {}
+
+const { title, description, index = true } = Astro.props
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<BaseHead
+			title={title}
+			description={description}
+			index={index}
+		/>
+	</head>
+	<body>
+		<BaseBody />
+
+		<slot />
+	</body>
+</html>
+<style is:global>
+	:root {
+		--primary-100:#61DAFB;
+    --primary-200:#39bcdc;
+    --primary-300:#007997;
+    --accent-100:#FF4081;
+    --accent-200:#ffe4ff;
+    --text-100:#FFFFFF;
+    --text-200:#e0e0e0;
+    --bg-100:#282C34;
+    --bg-200:#383c44;
+    --bg-300:#50555e;
+		--accent-100-opacity: rgba(255, 64, 129, 0.3);
+		--accent-200-opacity: rgba(255, 64, 129, 0.3);
+	}
+	
+	html {
+		font-family: system-ui, sans-serif;
+		background: var(--bg-100);
+		background-size: 224px;
+	}
+
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: var(--text-100);
+		text-wrap: balance;
+	}
+
+	p {
+		color: var(--text-200);
+		line-height: 1.5;
+		font-size: 1.25rem;
+		text-wrap: pretty;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		color: var(--text-200);
+	}
+
+	label {
+		color: var(--text-200);
+	}
+
+	input, textarea {
+		font-size: 0.9rem;
+	}
+
+	a {
+		color: var(--accent-200);
+	}
+
+	#slot-container {
+		padding-top: 100px;
+		flex-grow: 1;
+		display: flex;
+    flex-direction: column;
+    align-items: center;
+		gap: 1rem;
+	}
+
+	body {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		font-family: "Onest Variable", system-ui, sans-serif;
+	}
+
+	main {
+		width: 90%;
+		margin: 0 auto;
+		padding-bottom: 3rem;
+	}
+
+	@media (min-width: 768px) {
+		main {
+			width: 70ch;
+		}
+	}
+</style>

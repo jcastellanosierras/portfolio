@@ -1,7 +1,7 @@
 ---
-import Layout, { type BaseLayoutProps } from './Layout.astro'
+import Layout, { type LayoutProps } from '@/layouts/Layout.astro'
 
-interface Props extends BaseLayoutProps {}
+interface Props extends LayoutProps {}
 ---
 
 <Layout
@@ -39,12 +39,5 @@ interface Props extends BaseLayoutProps {}
 
   strong {
     color: var(--primary-100);
-  }
-
-  #sign {
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
   }
 </style>
