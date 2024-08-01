@@ -2,8 +2,8 @@
 import { createContact, ListId } from "@/lib/brevo"
 import { Image } from 'astro:assets'
 import NewsletterForm from '../components/NewsletterForm.astro'
-import NewsletterLayout from '../layouts/NewsletterLayout.astro'
 import myImage from '@/assets/images/josecastellano.jpg'
+import Layout from "@/layouts/Layout.astro"
 
 export const prerender = false
 
@@ -34,7 +34,7 @@ if (Astro.request.method === 'POST') {
 }
 ---
 
-<NewsletterLayout title={title} description={description}>
+<Layout title={title} description={description}>
   <div id='content'>
     <section id='titles'>
       <h1>
@@ -92,7 +92,7 @@ if (Astro.request.method === 'POST') {
       <NewsletterForm listId={ListId.WELCOME} />
     </section>
   </div>
-</NewsletterLayout>
+</Layout>
 
 <style>
   #content {
@@ -106,19 +106,27 @@ if (Astro.request.method === 'POST') {
     max-width: 90%;
   }
 
-  h1,
-  h2 {
-    text-wrap: balance;
-  }
-
   h1 {
     font-size: 2rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 3rem;
+    letter-spacing: 0.2rem;
+    font-weight: 700;
   }
 
   h2 {
     font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
     font-weight: 400;
     line-height: 1.4rem;
+  }
+
+  h1,
+  h2 {
+    text-wrap: balance;
   }
 
   p {
@@ -132,6 +140,10 @@ if (Astro.request.method === 'POST') {
   h2,
   p {
     letter-spacing: 0.5px;
+  }
+
+  strong {
+    color: var(--primary-100);
   }
 
   #lead-magnet {
