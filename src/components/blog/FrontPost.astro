@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import FormattedDate from '@/components/blog/FormattedDate.astro'
+import { Image } from 'astro:assets'
+
+type Props = CollectionEntry<'blog'>
+
+const { title, heroImage, publicationDate, updateDate } = Astro.props.data
+const urlImage = `/src/assets/images/blog/${heroImage}`
+const slug = Astro.props.slug
+---
+
+<article>
+  <a href={`/blog/${slug}/`}>
+    {heroImage && <Image width={1080} height={1080} src={urlImage} alt={`Imagen del post ${title}`} />}
+    <div>
+      <h2 class="title">{title}</h2>
+      <p class="date">
+        {updateDate
+          ? <FormattedDate date={updateDate} />
+          : <FormattedDate date={publicationDate} />
+        }
+      </p>
+    </div>
+  </a>
+</article>
+
+<style>
+  article {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  a:hover img {
+    transform: scale(1.05);
+    box-shadow: 0px 19px 21px 5px rgba(0, 0, 0, 0.15);
+  }
+
+  a:hover h2,
+  a:hover p {
+    color: var(--accent-100);
+  }
+
+  h2, p {
+    transition: color 0.3s;
+  }
+
+  img {
+    border-radius: 10px;
+    transition: all 0.3s;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  div {
+    width: 100%;
+    text-align: left
+  }
+</style>

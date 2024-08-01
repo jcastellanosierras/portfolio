@@ -1,0 +1,589 @@
+---
+title: 'He creado un nuevo blog para mi web con Astro'
+description: 'Te cuento por qué y cómo lo he hecho'
+publicationDate: 'Aug 01 2024'
+heroImage: 'nuevo-blog-con-astro.png'
+---
+
+import NewsletterForm from '@/components/NewsletterForm.astro'
+
+## ¿Por qué he decidido crear un nuevo blog para mi web hecha con Astro?
+
+Porque es una muy buena forma de posicionar tu web orgánicamente. Mediante **SEO**.
+
+Y porque así puedo concentrar todos mis carruseles, que hago para mi [LinkedIn](https://www.linkedin.com/in/josecastellanosierras/), en un sitio de una forma organizada.
+
+Así que te voy a enseñar **cómo lo he hecho**.
+
+### Creé una rama nueva en git.
+
+Es una buena práctica crear una nueva rama cuando quieras añadir una **nueva característica** a tu web.
+
+Por ejemplo, yo quería añadir un blog. Pues mi nueva rama se llama:
+
+- feature-blog
+
+```bash
+git checkout -b feature-blog
+```
+
+### Añadí la carpeta content
+
+La carpeta _content_ es una **carpeta reservada** de Astro, donde se guardan las **colecciones de contenido** referentes a tu aplicación.
+
+Como por ejemplo, blog, newsletter...
+
+### Definí la colección
+
+Como ya he dicho, en la carpeta content, se encuentran las **colecciones de contenido**.
+
+Pero no se definen por arte de magia.
+
+Las tienes que definir tú en el archivo _config.ts_, y exportarlas como un campo de _collections_.
+
+```typescript
+import { defineCollection, z } from 'astro:content'
+
+const blog = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publicationDate: z.coerce.date(),
+    updateDate: z.coerce.date().optional(),
+    heroImage: z.string().optional(),
+  })
+})
+
+export const collections = { blog }
+```
+
+Con Astro, en la librería content, viene incluido Zod. Por lo que puedes usar esta librería, incluida de forma implícita, para crear esquemas de datos.
+
+### Creé la carpeta blog
+
+Dentro de la carpeta _contents_ **es donde tienen que estar tus colecciones**. La colección que he definido es “blog”, así que creé la carpeta _blog_.
+
+Dentro de esta carpeta es donde debes incluir los artículos de tu blog. Ya sea en formato MD o MDX.
+Aunque para MDX todavía no hemos añadido soporte. Eso te lo enseñaré ahora en un rato.
+
+### Creé un Layout para los artículos
+
+En Astro, me gusta, y me parece buena práctica, tener un Layout para cada tipo de página distinta que quieras tener.
+
+Normalmente tengo un Layout base que importa y define las cosas comunes, y después voy creando otros Layouts a medida que me vayan haciendo falta.
+
+En este caso, los artículos del blog necesitarán algunas cosas que otro tipo de páginas no. Por tanto he creado un Layout para ellos.
+
+```astro
+---
+import type { CollectionEntry } from 'astro:content'
+import BaseLayout from './BaseLayout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+
+type Props = CollectionEntry<'blog'>['data']
+
+const { title, description, publicationDate, updateDate, heroImage } = Astro.props
+const urlImage = `/src/assets/images/blog/${heroImage}`
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    { /* ... */ }
+  </main>
+  <Footer />
+</BaseLayout>
+```
+
+#### Datos de la colección
+
+Aquí hay varias cositas.
+
+Importo el **BaseLayout** y dentro coloco el **Header**, el **main** (donde va a ir el contenido del blog), y el **Footer**.
+
+Y las **_Props_** que va a recibir este Layout son las que has tenido que definir en el **esquema de la colección**.
+
+Y este tipo viene dado por _CollectionEntry\<**’nombre-de-la-colección**’\>[’data’]_.
+
+Y mediante **_Astro.props_** puedes **acceder a ellas**.
+
+#### Renderizar la imagen del artículo
+
+Esta es otra cosa importante.
+
+Yo guardo las imágenes en la carpeta _**src**_ para que, mediante el **componente Image** de Astro, **se puedan optimizar**.
+
+Así que para ello defino la ruta hacia ella mediante:
+
+urlImage = \`/src/assets/images/blog/$\{**heroImage**\}\`
+
+Y después importo la imagen:
+
+```astro
+<div class="hero-image">
+  {heroImage && (
+    <Image
+      width={1080}
+      height={1080}
+      src={urlImage}
+      alt={`Imagen del post: ${title}`}
+    />
+  )}
+</div>
+```
+
+#### Formatear la fecha en el formato que se quiera
+
+Para que la fecha se vea de la forma en la que quería, creé un **componente para que la formateara**.
+
+Recibe la fecha en **formato ISO** y la **formatea**:
+
+```astro
+---
+interface Props {
+  date: Date
+}
+
+const { date } = Astro.props
+---
+
+<time datetime={date.toISOString()}>
+  {
+    date.toLocaleDateString('es-es', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
+</time>
+```
+
+#### Mostrarlo todo junto
+
+Ahora llega el momento de juntarlo todo y hacer que sea vea bonito y ordenado.
+
+Esta es la parte que **envuelve al contenido del artículo**. Este contenido será renderizado en el componente **slot**. Además creé un div para envolverlo y para darle estilos, ya que el componente _slot_ es una especie de _Fragment_.
+
+```astro
+---
+import type { CollectionEntry } from 'astro:content'
+import BaseLayout from './BaseLayout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import { Image } from 'astro:assets'
+import FormattedDate from '@/components/blog/FormattedDate.astro'
+
+type Props = CollectionEntry<'blog'>['data']
+
+const { title, description, publicationDate, updateDate, heroImage } = Astro.props
+const urlImage = `/src/assets/images/blog/${heroImage}`
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    <article>
+      <div class="hero-image">
+        {
+          heroImage && (
+            <Image
+              width={1080}
+              height={1080}
+              src={urlImage}
+              alt={`Imagen del post: ${title}`}
+            />
+          )
+        }
+      </div>
+      <div class="data">
+        <p>
+          {updateDate
+            ? <FormattedDate date={updateDate} />
+            : <FormattedDate date={publicationDate} />
+          }
+        </p>
+        <h1>{title}</h1>
+
+        <div class="separator"></div>
+  
+        <div class="content">
+          <slot />
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style is:global>
+  main {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-top: 2rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 2rem;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 2rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 70ch;
+  }
+
+  strong {
+    color: var(--primary-100);
+    font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 10px;
+
+    box-shadow: 0px 19px 21px 5px rgba(0, 0, 0, 0.20);
+  }
+
+  pre {
+    border-radius: 5px;
+  }
+
+  code {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg-200);
+  }
+
+  .data {
+    margin-top: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-100);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    opacity: 0.2;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .content p {
+    max-width: 60ch;
+    font-size: 1.2rem;
+  }
+
+  @media (width >= 768px) {
+    main {
+      width: 70ch;
+    }
+  }
+</style>
+```
+
+### Empecé a hacer las páginas donde se van a mostrar los artículos
+
+Para **renderizar los artículos** necesitaba “dos” páginas.
+
+La primera es el _index_. Donde van a aparecer los **últimos artículos**.
+
+Y la segunda es la **ruta dinámica** que va a **crear** todas las **páginas de los artículos**.
+
+```
+/blog
+  ├── [...slug].astro
+  └── index.astro
+```
+
+#### index.astro
+
+Esta es la página donde se va a renderizar la portada de los últimos artículos, con su enlace para entrar a ellos.
+
+Tiene dos cosas especiales. 
+
+→ Obtener artículos y ordenarlos por fecha
+
+→ Crear un componente para la portada
+
+##### Obtener artículos y ordenarlos por fecha
+
+```astro
+---
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('blog')
+
+const sortedPosts = posts.sort((a, b) => {
+  return a.data.publicationDate.valueOf() - b.data.publicationDate.valueOf()
+})
+---
+```
+
+Los **datos de las colecciones** se obtienen mediante la función _getCollection(‘**nombre-colección**’)_.
+
+Y faltaría **ordenarlos por fecha de publicación**, que puedes hacerlo mediante el método _sort()_.
+
+##### Crear componente para la portada
+
+```astro
+---
+import type { CollectionEntry } from 'astro:content'
+import FormattedDate from '@/components/blog/FormattedDate.astro'
+import { Image } from 'astro:assets'
+
+type Props = CollectionEntry<'blog'>
+
+const { title, heroImage, publicationDate, updateDate } = Astro.props.data
+const urlImage = `/src/assets/images/blog/${heroImage}`
+const slug = Astro.props.slug
+---
+
+<article>
+  <a href={`/blog/${slug}/`}>
+    {heroImage && <Image width={1080} height={1080} src={urlImage} alt={`Imagen del post ${title}`} />}
+    <div>
+      <h2 class="title">{title}</h2>
+      <p class="date">
+        {updateDate
+          ? <FormattedDate date={updateDate} />
+          : <FormattedDate date={publicationDate} />
+        }
+      </p>
+    </div>
+  </a>
+</article>
+
+<style>
+  article {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  a:hover img {
+    transform: scale(1.05);
+    box-shadow: 0px 19px 21px 5px rgba(0, 0, 0, 0.15);
+  }
+
+  a:hover h2,
+  a:hover p {
+    color: var(--accent-100);
+  }
+
+  h2, p {
+    transition: color 0.3s;
+  }
+
+  img {
+    border-radius: 10px;
+    transition: all 0.3s;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  div {
+    width: 100%;
+    text-align: left
+  }
+</style>
+```
+
+##### Juntarlo todo
+
+Ya tienes, y entiendes las dos cosas que se necesitan para crear la página del índice del blog. Así que lo que te queda por hacer es juntarlo todo.
+
+Y de esta manera te quedará el siguiente código de Astro para el índice del blog.
+
+```astro
+---
+import FrontPost from '@/components/blog/FrontPost.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('blog')
+
+const sortedPosts = posts.sort((a, b) => {
+  return a.data.publicationDate.valueOf() - b.data.publicationDate.valueOf()
+})
+---
+
+<Layout
+  title='Blog'
+  description='Artículos sobre tecnología, desarrollo web y más.'
+  index={false}
+>
+  <h1>Últimos artículos del blog</h1>
+  <section>
+    <nav>
+      <ul>
+        {sortedPosts.map((post) => (
+          <li>
+            <FrontPost
+              {...post}
+            />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+  }
+
+  @media (width >= 768px) {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    ul li:first-child {
+      width: 100%;
+    }
+
+    ul li {
+      width: 48%;
+    }
+  }
+</style>
+```
+
+#### [...slug].astro
+
+Ya esto es **lo último**. Pero hay dos cosas muy importantes.
+
+→ Crear las páginas de todos los artículos
+
+→ Renderizar el contenido
+
+##### Crear las páginas de todos los artículos
+
+Para entender qué significa el nombre del archivo primero te voy a explicar esto:
+
+```astro
+---
+import { type getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
+}
+---
+```
+
+La función _getStaticPaths()_ crea una **página estática por cada elemento con un parámetro slug** que exista.
+
+Por eso el nombre del archivo es _slug_. Porque es el parámetro que va a **dar nombre a la ruta del artículo**.
+
+
+##### Renderizar el contenido
+
+Una vez se ha llamado a la función y se han creado las rutas estáticas, queda definir las _Props_ del componente y **renderizar el contenido**.
+
+```astro
+---
+import { type CollectionEntry, getCollection } from 'astro:content'
+import BlogLayout from '@/layouts/BlogLayout.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
+}
+type Props = CollectionEntry<'blog'>
+
+const post = Astro.props
+const { Content } = await post.render()
+---
+
+<BlogLayout {...post.data}>
+  <Content />
+</BlogLayout>
+```
+
+Lo del tipo de las _Props_ ya lo has visto. Lo que todavía no has visto, es que **el elemento que te devuelve tiene el método** _**render**()_.
+
+Este método **devuelve un componente** que tiene dentro todo el **contenido del artículo**.
+
+Este componente es _Content_. Y solo tienes que **importarlo dentro del Layout** que has creado antes, el **BlogLayout**.
+
+## Fin
+
+Ya tienes tu blog creado con Astro, en poco más de 20 minutos (si me apuras).
+
+### Ahh buenooo
+
+Te había dicho que te iba a enseñar a **integrar MDX**.
+
+Si te **suscribes** a mi newsletter antes del _viernes 2 de agosto_ **te envío un vídeo** de cómo lo hago con mi blog.
+
+Por cierto, este artículo está hecho con MDX. Así que ahí te lo dejo:
+
+<NewsletterForm listId={10} />

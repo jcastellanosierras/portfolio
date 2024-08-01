@@ -1,25 +1,35 @@
 ---
 const navItems = [
   {
-    name: 'Experiencia',
-    label: 'experiencia',
-    link: '/#experiencia'
+    name: 'Inicio',
+    label: 'inicio',
+    link: '/'
   },
-  {
-    name: 'Proyectos',
-    label: 'proyectos',
-    link: '/#proyectos'
-  },
-  {
-    name: 'Sobre mí',
-    label: 'sobre-mi',
-    link: '/#sobre-mi'
-  },
+  // {
+  //   name: 'Experiencia',
+  //   label: 'experiencia',
+  //   link: '/#experiencia'
+  // },
+  // {
+  //   name: 'Proyectos',
+  //   label: 'proyectos',
+  //   link: '/#proyectos'
+  // },
+  // {
+  //   name: 'Sobre mí',
+  //   label: 'sobre-mi',
+  //   link: '/#sobre-mi'
+  // },
   {
     name: 'Newsletter',
     label: 'newsletter',
     link: '/newsletter'
   },
+  {
+    name: 'Blog',
+    label: 'blog',
+    link: '/blog'
+  }
 ]
 ---
 
@@ -45,6 +55,7 @@ const navItems = [
     margin-top: 10px;
     position: fixed;
     top: 0px;
+    z-index: 1000;
   }
 
   nav {
@@ -73,6 +84,7 @@ const navItems = [
     padding-top: 1rem;
     padding-bottom: 1rem;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   a:hover {

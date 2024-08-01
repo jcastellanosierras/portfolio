@@ -1,0 +1,59 @@
+---
+import FrontPost from '@/components/blog/FrontPost.astro'
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const posts = await getCollection('blog')
+
+const sortedPosts = posts.sort((a, b) => {
+  return a.data.publicationDate.valueOf() - b.data.publicationDate.valueOf()
+})
+---
+
+<Layout
+  title='Blog'
+  description='Artículos sobre tecnología, desarrollo web y más.'
+  index={false}
+>
+  <h1>Últimos artículos del blog</h1>
+  <section>
+    <nav>
+      <ul>
+        {sortedPosts.map((post) => (
+          <li>
+            <FrontPost
+              {...post}
+            />
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-align: center;
+  }
+
+  @media (width >= 768px) {
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    ul li:first-child {
+      width: 100%;
+    }
+
+    ul li {
+      width: 48%;
+    }
+  }
+</style>
